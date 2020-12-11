@@ -10,16 +10,30 @@ import {httpInterceptorProviders} from './http-interceptors';
 import {MessageService} from './message.service';
 import {AuthService} from './auth.service';
 import {HttpClientModule} from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { EventsComponent } from './events/events.component';
+import { EventComponent } from './event/event.component';
+import { CategoriesComponent } from './admin/categories/categories.component';
+import { LocationsComponent } from './admin/locations/locations.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    EventsComponent,
+    EventComponent,
+    CategoriesComponent,
+    LocationsComponent
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule
+    ],
   providers: [
     SingletonService,
     HttpErrorHandler,
