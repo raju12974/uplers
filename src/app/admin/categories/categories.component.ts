@@ -49,6 +49,9 @@ export class CategoriesComponent implements OnInit {
   }
 
   update_category(category){
+    if(!category['temp_name']){
+      return;
+    }
     let post_data = {name: category['temp_name']}
 
     this.api.update_category(category['id'], post_data).subscribe(res =>{

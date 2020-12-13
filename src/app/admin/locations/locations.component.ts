@@ -52,6 +52,9 @@ export class LocationsComponent implements OnInit {
   }
 
   update_location(location){
+    if(!location['temp_name']){
+      return;
+    }
     let post_data = {name: location['temp_name']}
 
     this.api.update_location(location['id'], post_data).subscribe(res =>{
