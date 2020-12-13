@@ -33,6 +33,31 @@ export class RegisterComponent implements OnInit {
 
   register(){
     this.login_msg = '';
+
+    if(!this.name){
+      this.login_msg = "Please enter your name";
+      return
+    }
+    if(!this.email){
+      this.login_msg = "Please enter an email address";
+      return
+    }
+
+    if(this.email){
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+     let valid =  re.test(this.email.toLowerCase());
+
+     if(!valid){
+       this.login_msg = "Please enter a valid email address";
+       return
+     }
+    }
+
+    if(!this.password){
+      this.login_msg = "Please enter password";
+      return;
+    }
+
     let post_data = {
       name: this.name,
       email: this.email,

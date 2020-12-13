@@ -32,6 +32,17 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.login_msg = '';
+
+    if(!this.email){
+      this.login_msg = "Please enter a valid email address";
+      return
+    }
+
+    if(!this.password){
+      this.login_msg = "Please enter password";
+      return;
+    }
+
     let post_data = {email: this.email, password: this.password};
 
     this.api.login(post_data).subscribe(res =>{
