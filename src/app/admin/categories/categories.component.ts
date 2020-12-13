@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../../api.service';
+import {Router} from '@angular/router';
+import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-categories',
@@ -12,7 +14,7 @@ export class CategoriesComponent implements OnInit {
   public category_name = '';
   public got_data: boolean = false;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.api.get_categories().subscribe(res => {
@@ -43,4 +45,19 @@ export class CategoriesComponent implements OnInit {
     })
   }
 
+  update_category(category){
+    let post_data = {name: category['temp_name']}
+
+    this.api.update_category(category['id'], post_data).subscribe(res =>{
+      if(res['success'] =='Y'){
+        category['category_name'] = category['temp_name'];
+        category['temp_name'] = '';
+      }
+    })
+  }
+
+  logout(){
+    this.auth.logout();
+    this.router.navigate(['/login'])
+  }
 }

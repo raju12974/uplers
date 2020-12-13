@@ -9,6 +9,8 @@ import {RegisterComponent} from './register/register.component';
 import {NoAuthGuard} from './no-auth.guard';
 import {AuthGuard} from './auth.guard';
 import {AddEventComponent} from './admin/add-event/add-event.component';
+import {UpdateEventComponent} from './admin/update-event/update-event.component';
+import {AdminGuard} from './admin.guard';
 
 
 const routes: Routes = [
@@ -30,12 +32,12 @@ const routes: Routes = [
   {
     path: 'categories',
     component: CategoriesComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'locations',
     component: LocationsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'events',
@@ -47,7 +49,11 @@ const routes: Routes = [
   },{
     path: 'add-event',
     component: AddEventComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, AdminGuard]
+  }, {
+    path: 'update-event/:id',
+    component: UpdateEventComponent,
+    canActivate: [AuthGuard, AdminGuard]
   }
 ];
 

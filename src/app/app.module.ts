@@ -18,6 +18,7 @@ import { CategoriesComponent } from './admin/categories/categories.component';
 import { LocationsComponent } from './admin/locations/locations.component';
 import {FormsModule} from '@angular/forms';
 import { AddEventComponent } from './admin/add-event/add-event.component';
+import { UpdateEventComponent } from './admin/update-event/update-event.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AddEventComponent } from './admin/add-event/add-event.component';
     EventComponent,
     CategoriesComponent,
     LocationsComponent,
-    AddEventComponent
+    AddEventComponent,
+    UpdateEventComponent
   ],
     imports: [
         HttpClientModule,

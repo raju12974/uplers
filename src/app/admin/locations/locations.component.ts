@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../../api.service';
+import {AuthService} from '../../auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-locations',
@@ -11,7 +13,7 @@ export class LocationsComponent implements OnInit {
   public location_name = '';
   public got_data: boolean = false;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.api.get_locations().subscribe(res => {
@@ -38,9 +40,27 @@ export class LocationsComponent implements OnInit {
     let cat_id = this.locations[i]['id'];
 
     this.api.delete_location(cat_id).subscribe(res =>{
-      this.locations.splice(i,1);
+      if(res['success'] == 'Y'){
+        this.locations.splice(i,1);
+      }else{
+        alert(res['msg']);
+      }
     })
   }
 
+  update_location(location){
+    let post_data = {name: location['temp_name']}
 
+    this.api.update_location(location['id'], post_data).subscribe(res =>{
+      if(res['success'] =='Y'){
+        location['name'] = location['temp_name'];
+        location['temp_name'] = '';
+      }
+    })
+  }
+
+  logout(){
+    this.auth.logout();
+    this.router.navigate(['/login'])
+  }
 }

@@ -1,10 +1,31 @@
 <div class="main text-center">
   <div class="center-div text-left">
+    <div class="text-right mb-5">
+      <button class="btn btn-outline-info" *ngIf="logged_in" (click)="logout()">Logout</button>
+      <button class="btn btn-outline-primary" *ngIf="!logged_in" (click)="login()">Sign in</button>
+    </div>
     <div class="d-flex justify-content-between">
       <h3>Events</h3>
-      <button class="btn btn-secondary">Add event</button>
+      <button *ngIf="is_admin" class="btn btn-secondary" routerLink="/add-event">Add event</button>
     </div>
-    <table class="table table-hover">
+
+    <div class="row mt-3 mb-3">
+      <input type="text" class="form-control col-2" placeholder="Search Name" name="name" [(ngModel)]="name"/>
+      <input type="date" class="form-control col-2 ml-2" placeholder="Search Date" name="date" [(ngModel)]="date"/>
+
+      <select class="form-control col-3 ml-2" name="location" [(ngModel)]="location_id">
+        <option value="">Search Location</option>
+        <option *ngFor="let location of locations" [value]="location['id']">{{location['name']}}</option>
+      </select>
+      <select class="form-control col-3 ml-2" [(ngModel)]="category_id" name="category">
+        <option value="">Search Category</option>
+        <option *ngFor="let cat of categories" [value]="cat['id']">{{cat['category_name']}}</option>
+      </select>
+
+      <button class="btn btn-info ml-2" (click)="get_events()">Search</button>
+
+    </div>
+    <table class="table table-hover mt-3">
       <thead>
       <tr>
         <th scope="col">S. No</th>
@@ -25,7 +46,7 @@
         <td>{{event['location']['name']}}</td>
         <td>{{cat_names(event)}}</td>
         <td *ngIf="is_admin">
-          <button class="btn btn-info">Update</button>
+          <button class="btn btn-info" [routerLink]="['/update-event', event['id']]">Update</button>
           <button class="ml-2 btn btn-danger">Delete</button>
         </td>
       </tr>
