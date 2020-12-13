@@ -27,6 +27,9 @@ export class CategoriesComponent implements OnInit {
   }
 
   add_category(){
+    if(!this.category_name){
+      return;
+    }
     let post_data = {name: this.category_name};
 
     this.api.add_category(post_data).subscribe(res =>{

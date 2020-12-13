@@ -26,6 +26,9 @@ export class LocationsComponent implements OnInit {
   }
 
   add_location(){
+    if(!this.location_name){
+      return;
+    }
     let post_data = {name: this.location_name};
 
     this.api.add_locaiton(post_data).subscribe(res =>{
