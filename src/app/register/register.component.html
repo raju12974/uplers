@@ -1,22 +1,26 @@
 <div class="main ">
-  <form class="form-signin">
+  <form class="form-signin" (ngSubmit)="register()">
     <div class="text-center">
     <img class="mb-4" src="../../assets/imgs/img.png" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Register</h1>
     </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Your name</label>
-        <input type="email" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Enter Name">
+        <input type="email" class="form-control" [(ngModel)]="name" id="exampleInputName" name="name" aria-describedby="emailHelp" placeholder="Enter Name">
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <input type="email" class="form-control" id="exampleInputEmail1" [(ngModel)]="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="password" name="password" placeholder="Password">
       </div>
+
+    <div *ngIf="login_msg" class="text-left mb-2">
+      <span class="" style="color: red; font-size: 12px">{{login_msg}}</span>
+    </div>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 

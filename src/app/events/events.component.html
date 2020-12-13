@@ -1,1 +1,35 @@
-<p>events works!</p>
+<div class="main text-center">
+  <div class="center-div text-left">
+    <div class="d-flex justify-content-between">
+      <h3>Events</h3>
+      <button class="btn btn-secondary">Add event</button>
+    </div>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">S. No</th>
+        <th scope="col">Title</th>
+        <th scope="col">Descrition</th>
+        <th scope="col">Date</th>
+        <th scope="col">Location</th>
+        <th scope="col">Categories</th>
+        <th *ngIf="is_admin" scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let event of events; let i=index" class="align-items-center">
+        <th scope="row">{{i+1}}</th>
+        <td><a [routerLink]="['/event', event['id']]">{{event['title']}}</a></td>
+        <td style="max-width: 300px;"><div style="max-height: 100px; overflow: hidden; text-overflow: ellipsis">{{event['description']}}</div></td>
+        <td>{{event['date']}}</td>
+        <td>{{event['location']['name']}}</td>
+        <td>{{cat_names(event)}}</td>
+        <td *ngIf="is_admin">
+          <button class="btn btn-info">Update</button>
+          <button class="ml-2 btn btn-danger">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

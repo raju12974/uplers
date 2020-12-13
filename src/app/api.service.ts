@@ -27,4 +27,44 @@ export class ApiService {
   register(post_data){
     return this.http.post(this.singleton.root_url+'api/register', post_data);
   }
+
+  get_categories(){
+    return this.http.get(this.singleton.root_url+'api/get/categories');
+  }
+
+  add_category(post_data){
+    return this.http.post(this.singleton.root_url+'api/add/category', post_data);
+  }
+
+  delete_category(id){
+    return this.http.get(this.singleton.root_url+'api/delete/category/'+id)
+  }
+
+  get_locations(){
+    return this.http.get(this.singleton.root_url+'api/get/locations');
+  }
+
+  add_locaiton(post_data){
+    return this.http.post(this.singleton.root_url+'api/add/location', post_data);
+  }
+
+  delete_location(id){
+    return this.http.get(this.singleton.root_url+'api/delete/location/'+id)
+  }
+
+  add_event(post_data){
+    return this.http.post(this.singleton.root_url+'api/add/event', post_data);
+  }
+
+  get_events(page=1){
+    return this.http.get(this.singleton.root_url+'api/get/events?page='+page);
+  }
+
+  get_event(id){
+    return this.http.get(this.singleton.root_url+'api/get/event/'+id)
+  }
+
+  add_comment(id, post_data){
+    return this.http.post(this.singleton.root_url+'api/add/comment/'+id, post_data);
+  }
 }

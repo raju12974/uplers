@@ -6,32 +6,48 @@ import {EventsComponent} from './events/events.component';
 import {EventComponent} from './event/event.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import {NoAuthGuard} from './no-auth.guard';
+import {AuthGuard} from './auth.guard';
+import {AddEventComponent} from './admin/add-event/add-event.component';
 
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [NoAuthGuard]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [NoAuthGuard]
   },
   {
     path: 'categories',
-    component: CategoriesComponent
+    component: CategoriesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'locations',
-    component: LocationsComponent
+    component: LocationsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'events',
-    component: EventsComponent
+    component: EventsComponent,
   },
   {
     path: 'event/:id',
-    component: EventComponent
+    component: EventComponent,
+  },{
+    path: 'add-event',
+    component: AddEventComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
